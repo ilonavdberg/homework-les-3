@@ -14,11 +14,10 @@ public class Translator {
         return null;
     }
 
-    private HashMap<Integer, String> setMap(Integer[] numeric, String[] alphabetic) {
+    private HashMap<Integer, String> setMap(Integer[] numeric, String[] alphabetic) throws IllegalArgumentException {
         HashMap<Integer, String> map = new HashMap<>();
         if (numeric.length != alphabetic.length) {
-            System.out.println("Invalid input. Array lengths don't match!");
-            return null;
+            throw new IllegalArgumentException("numeric and alphabetic arrays must have the same length");
         }
         for (int i = 0; i < numeric.length; i++) {
             map.put(numeric[i], alphabetic[i]);
