@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -20,15 +21,21 @@ public class Main {
                 continue;
             }
             System.out.println("Typ een cijfer van 1 t/m 9");
-            Integer number = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                Integer number = scanner.nextInt();
+                scanner.nextLine();
 
-            String result = translator.translate(number);
-            if (result == null) {
+                String result = translator.translate(number);
+                if (result == null) {
+                    System.out.println("Ongeldige invoer!");
+                    continue;
+                }
+                System.out.println("De vertaling van " + number + " is: " + result);
+
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
                 System.out.println("Ongeldige invoer!");
-                continue;
             }
-            System.out.println("De vertaling van " + number + " is: " + result);
         }
     }
 }
