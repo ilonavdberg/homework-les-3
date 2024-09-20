@@ -8,7 +8,10 @@ public class Translator {
     }
 
     public String translate(Integer num) {
-        return map.get(num);
+        if (map.containsKey(num)) {
+            return map.get(num);
+        }
+        return null;
     }
 
     private HashMap<Integer, String> setMap(Integer[] numeric, String[] alphabetic) {
