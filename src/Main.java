@@ -22,7 +22,7 @@ public class Main {
             }
             System.out.println("Typ een cijfer van 1 t/m 9");
             try {
-                Integer number = scanner.nextInt();
+                int number = scanner.nextInt();
                 scanner.nextLine();
 
                 String result = translator.translate(number);
