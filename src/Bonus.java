@@ -9,58 +9,64 @@ public class Bonus {
         // Onderstaande code is uitgecommentarieerd. Haal de code uit de comment (delete /* en */) om aan de slag te gaan met de bonus
         // In de code staan op verschillende plekken comments tussen "/*...*/" als hint wat je moet doen
 
-
         HashSet<Integer> secretnumber = randomnumbergenerator();
+        System.out.println(secretnumber);
         String stringnumber = setToStringConverter(secretnumber);
         System.out.println(stringnumber);
-        feedback(/*vul hier het juiste argument in*/);
+        feedback(stringnumber);
 
     }
 
-    public static void/*moet dit returntype "void" zijn of wat anders?*/ randomnumbergenerator(/*Heeft deze methode nog parameter(s) nodig?*/){
-         /*
-        Vul hier de body van de methode in.
+    public static HashSet randomnumbergenerator(){
+        HashSet<Integer> randomNumbers = new HashSet<Integer>();
 
-        Stappenplan:
-        - Maak een nieuwe variabele van type Random. (Tip: Zoek op internet hoe je Random kunt gebruiken)
-        - Maak een nieuwe variabele van type HashSet.
-        - Schrijf een while-loop om 4 random nummers aan de hashset toe te voegen
-        - return de hashset
-         */
+        while(randomNumbers.size() < 4){
+            int randomNumber = (int) (Math.random() * 10);
+            randomNumbers.add(randomNumber);
+        }
+        return randomNumbers;
     }
 
-    public static void/*moet dit returntype "void" zijn of wat anders?*/ setToStringConverter(/*Heeft deze methode nog parameter(s) nodig?*/){
-        /*
-        Vul hier de body van de methode in.
+    public static String setToStringConverter(HashSet<Integer> set) {
+        StringBuilder numberString = new StringBuilder();
 
-        Stappenplan:
-        - Maak als eerst een String variabele met als waarde een lege String. (of gebruik een StringBuilder)
-        - Schrijf vervolgens een for-loop om de items in de hashset een voor een aan de String variabele toe te voegen.
-        - Return de (gevulde) String variabele
-         */
+        for (int item : set) {
+            numberString.append(item);
+        }
+
+        return numberString.toString();
     }
 
 
 
-    public static void/*moet dit "void" zijn of wat anders?*/ feedback(String stringnumber) {
+    public static void feedback(String stringnumber) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder feedback = new StringBuilder();
         System.out.println("+ = juiste nummer op de juiste plek, O = juiste nummer verkeerde plek, X = verkeerde nummer");
-        System.out.println("Doe een gok, Let op vul 4 getallen in.");
-        String guess = scanner.nextLine();
-        if (Objects.equals(guess, stringnumber)) {
-            System.out.println("gefeliciteerd je hebt het goed");
-        } else {
-            for (int i = 0; i < 4; i++) {
-                if (guess.substring(i, i + 1).equals(stringnumber.substring(i, i + 1))) {
-                    feedback.append("+");
-                } else if (stringnumber.contains(guess.substring(i, i + 1))) {
-                    feedback.append("0");
-                } else {
-                    feedback.append("X");
+
+        while (true) {
+            feedback.setLength(0);
+            System.out.println("Doe een gok, Let op vul 4 getallen in.");
+            String guess = scanner.nextLine();
+            if (Objects.equals(guess, stringnumber)) {
+                System.out.println("gefeliciteerd je hebt het goed");
+                break;
+            } else {
+                for (int i = 0; i < 4; i++) {
+                    if (guess.substring(i, i + 1).equals(stringnumber.substring(i, i + 1))) {
+                        feedback.append("+");
+                    } else if (stringnumber.contains(guess.substring(i, i + 1))) {
+                        feedback.append("0");
+                    } else {
+                        feedback.append("X");
+                    }
                 }
             }
+            System.out.println(feedback.toString());
         }
-        System.out.println(feedback.toString());
+
     }
 }
+
+//Waarom is een Hasset geen goede keuze voor deze opdracht?
+//Omdat een secret code nooit twee dezelfde cijfers kan bevatten
