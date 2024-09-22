@@ -43,21 +43,30 @@ public class Bonus {
         Scanner scanner = new Scanner(System.in);
         StringBuilder feedback = new StringBuilder();
         System.out.println("+ = juiste nummer op de juiste plek, O = juiste nummer verkeerde plek, X = verkeerde nummer");
-        System.out.println("Doe een gok, Let op vul 4 getallen in.");
-        String guess = scanner.nextLine();
-        if (Objects.equals(guess, stringnumber)) {
-            System.out.println("gefeliciteerd je hebt het goed");
-        } else {
-            for (int i = 0; i < 4; i++) {
-                if (guess.substring(i, i + 1).equals(stringnumber.substring(i, i + 1))) {
-                    feedback.append("+");
-                } else if (stringnumber.contains(guess.substring(i, i + 1))) {
-                    feedback.append("0");
-                } else {
-                    feedback.append("X");
+
+        while (true) {
+            feedback.setLength(0);
+            System.out.println("Doe een gok, Let op vul 4 getallen in.");
+            String guess = scanner.nextLine();
+            if (Objects.equals(guess, stringnumber)) {
+                System.out.println("gefeliciteerd je hebt het goed");
+                break;
+            } else {
+                for (int i = 0; i < 4; i++) {
+                    if (guess.substring(i, i + 1).equals(stringnumber.substring(i, i + 1))) {
+                        feedback.append("+");
+                    } else if (stringnumber.contains(guess.substring(i, i + 1))) {
+                        feedback.append("0");
+                    } else {
+                        feedback.append("X");
+                    }
                 }
             }
+            System.out.println(feedback.toString());
         }
-        System.out.println(feedback.toString());
+
     }
 }
+
+//Waarom is een Hasset geen goede keuze voor deze opdracht?
+//Omdat een secret code nooit twee dezelfde cijfers kan bevatten
